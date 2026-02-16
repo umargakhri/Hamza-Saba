@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Royal Nikkah | Saba & Hamza</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --royal-teal: #00332c;
+            --gold-gradient: linear-gradient(45deg, #a67c00, #ffbf00, #ffdc73, #ffbf00, #a67c00);
+            --luxury-gold: #D4AF37;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--royal-teal); 
+            color: #fff9e6; 
+            font-family: 'Montserrat', sans-serif; 
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* LUXURY PARALLAX BACKGROUND */
+        #bg-pattern {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/gold-algeria.png');
+            opacity: 0.15; z-index: -1;
+        }
+
+        /* ENTRANCE ENVELOPE */
+        #envelope {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--royal-teal); z-index: 1000; display: flex;
+            justify-content: center; align-items: center; cursor: pointer;
+            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .envelope-card {
+            padding: 60px; border: 2px solid var(--luxury-gold); 
+            background: rgba(0,0,0,0.3); backdrop-filter: blur(10px);
+            text-align: center; border-radius: 2px;
+            box-shadow: 0 0 100px rgba(0,0,0,0.5);
+        }
+
+        /* MAIN WRAPPER */
+        .main-content { max-width: 650px; margin: 0 auto; padding: 40px 20px; display: none; }
+        .visible { display: block; animation: luxFade 2.5s ease-out; }
+        @keyframes luxFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ARABIC BISMILLAH */
+        .bismillah {
+            font-family: 'Noto Nastaliq Urdu', serif; font-size: 2.2rem;
+            color: var(--luxury-gold); margin: 40px 0; text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            animation: glow 3s infinite alternate;
+        }
+        @keyframes glow { from { opacity: 0.7; } to { opacity: 1; } }
+
+        /* URDU SHAYARI */
+        .poetry {
+            font-family: 'Noto Nastaliq Urdu', serif; font-size: 1.2rem;
+            color: var(--luxury-gold); margin: 30px 0; line-height: 2.5; font-style: italic;
+        }
+
+        .card {
+            background: var(--glass); backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            padding: 50px 30px; margin: 40px 0; border-radius: 15px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        h1 { font-family: 'Pinyon Script', cursive; font-size: clamp(4rem, 15vw, 7rem); color: var(--luxury-gold); }
+        .host-title { letter-spacing: 4px; font-weight: 300; font-size: 0.8rem; color: var(--luxury-gold); }
+
+        /* SCRATCH COMPONENT */
+        .scratch-box {
+            position: relative; width: 300px; height: 130px; margin: 30px auto;
+            background: var(--white); border-radius: 10px; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .scratch-box #reveal-text { color: var(--royal-teal); font-weight: 700; font-size: 1.5rem; text-align: center; }
+        #scratch-canvas { position: absolute; top: 0; left: 0; z-index: 2; cursor: pointer; touch-action: none; }
+
+        /* ELEGANT DRESS CODE */
+        .dress-section { 
+            background: linear-gradient(145deg, #ffffff, #f0f0f0); 
+            color: var(--royal-teal); border: none; padding: 40px;
+        }
+        .dress-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; letter-spacing: 2px; }
+        .dress-circle { 
+            width: 80px; height: 80px; background: white; border: 4px solid var(--luxury-gold);
+            border-radius: 50%; margin: 20px auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* INTERACTIVE BUTTONS */
+        .btn-luxury {
+            background: var(--gold-gradient); color: var(--royal-teal);
+            padding: 20px; border: none; font-weight: 700; border-radius: 5px;
+            text-transform: uppercase; letter-spacing: 3px; cursor: pointer;
+            width: 100%; margin-top: 20px; transition: 0.5s;
+        }
+        .btn-luxury:hover { filter: brightness(1.2); letter-spacing: 5px; }
+
+        input, select { 
+            width: 100%; padding: 18px; margin: 10px 0; background: rgba(255,255,255,0.05); 
+            border: 1px solid var(--luxury-gold); color: white; font-size: 1rem;
+        }
+
+        #music-btn {
+            position: fixed; bottom: 30px; left: 30px; background: var(--luxury-gold);
+            width: 50px; height: 50px; border-radius: 50%; display: flex;
+            justify-content: center; align-items: center; cursor: pointer; z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg-pattern"></div>
+    <audio id="inviteMusic" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-india.mp3" type="audio/mpeg">
+    </audio>
+    <div id="music-btn" onclick="toggleMusic()">🎻</div>
+
+    <div id="envelope" onclick="revealSite()">
+        <div class="envelope-card">
+            <div class="bismillah" style="margin: 0 0 20px 0;">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+            <p class="host-title">SABA & HAMZA</p>
+            <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--luxury-gold); margin: 15px 0;">THE ROYAL NIKKAH</h2>
+            <p style="letter-spacing: 5px; font-size: 0.7rem; color: #fff;">TAP TO ENTER</p>
+        </div>
+    </div>
+
+    <div class="main-content" id="main">
+        <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+        
+        <p class="host-title">MASTER MUHAMMAD SHARIF & FAMILY</p>
+        <p style="margin-top: 10px; font-weight: 300;">Request the honour of your presence at the Nikkah of</p>
+        
+        <h1>Saba & Hamza</h1>
+
+        <div class="poetry">
+             <br> وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+
+اور اُس کی نشانیوں میں سے ہے کہ اُس نے تمہارے لیے تم ہی میں سے جوڑے پیدا کیے تاکہ تم اُن سے سکون حاصل کرو، اور اُس نے تمہارے درمیان محبت اور رحمت رکھ دی۔
+
+سورۃ الروم — آیت 21
+        </div>
+
+        <section class="card">
+            <h2 style="font-family: 'Playfair Display'; color: var(--luxury-gold); letter-spacing: 2px;">THE DATE</h2>
+            <p style="font-size: 0.8rem; margin-bottom: 15px;">(Scratch the card below to reveal the date)</p>
+            <div class="scratch-box">
+                <div id="reveal-text">MARCH 17, 2026<br><span style="font-size: 0.9rem; font-weight: 300;">4:30 PM INSHALLAH</span></div>
+                <canvas id="scratch-canvas" width="300" height="130"></canvas>
+            </div>
+            <p><strong>Gakhri, Punjab, Pakistan</strong></p>
+            <a href="https://maps.google.com/?q=Gakhri+Punjab+Pakistan" target="_blank" class="btn-luxury" style="display:block; text-decoration: none; margin-top: 30px;">GET DIRECTIONS</a>
+        </section>
+
+        <section class="card dress-section">
+            <h2 class="dress-title">DRESS CODE</h2>
+            <div class="dress-circle"></div>
+            <p style="letter-spacing: 2px; font-weight: 700; margin-bottom: 10px;">THE WHITE ELEGANCE</p>
+            <p style="font-size: 0.9rem; line-height: 1.8;">
+                We invite our guests to participate in our theme by wearing <b>White Traditional Attire</b>. Let us create a sea of purity and light to celebrate this holy union.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2 style="font-family: 'Playfair Display'; color: var(--luxury-gold);">GUEST ASSISTANCE</h2>
+            <p style="margin-bottom: 10px;">For any inquiries or location guidance, call:</p>
+            <p style="font-size: 1.6rem; color: var(--luxury-gold); font-weight: 700;">03068505970</p>
+            <p style="font-size: 0.8rem; letter-spacing: 2px;">MASTER MUHAMMAD SHARIF</p>
+            <a href="tel:03068505970" class="btn-luxury" style="text-decoration: none; display: block;">CALL NOW</a>
+        </section>
+
+        <section class="card">
+            <h2 style="font-family: 'Playfair Display'; color: var(--luxury-gold);">RSVP</h2>
+            <form onsubmit="sendRSVP(event)">
+                <input type="text" id="guestName" placeholder="Full Name" required>
+                <select id="guestCount" required>
+                    <option value="">Number of Guests</option>
+                    <option value="1">1 Person</option>
+                    <option value="2">2 People</option>
+                    <option value="3">3 People</option>
+                    <option value="Family">Family</option>
+                </select>
+                <button type="submit" class="btn-luxury">CONFIRM ATTENDANCE</button>
+            </form>
+            <div id="rsvpDone" style="display:none; color: var(--luxury-gold); margin-top:20px; font-size: 1.5rem; font-family: 'Pinyon Script';">
+                Shukriya. We await your arrival.
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 style="font-family: 'Playfair Display'; color: var(--luxury-gold);">NIKKAH GALLERY</h2>
+            <p style="font-size: 0.8rem; margin-bottom: 20px;">Upload and view the celebration memories.</p>
+            <div style="border: 1px solid var(--luxury-gold); padding: 40px; cursor: pointer;" onclick="window.open('YOUR_GOOGLE_FOLDER_LINK', '_blank')">
+                <p style="letter-spacing: 3px;">[ OPEN DIGITAL GUESTBOOK ]</p>
+            </div>
+        </section>
+
+        <footer style="padding: 60px 0; opacity: 0.4; font-size: 0.7rem; letter-spacing: 4px;">
+            SABA & HAMZA | GAKHRI | MARCH 17, 2026
+        </footer>
+    </div>
+
+    <script>
+        function revealSite() {
+            document.getElementById('envelope').style.transform = 'translateY(-100%)';
+            document.getElementById('main').classList.add('visible');
+            initScratch();
+            toggleMusic();
+        }
+
+        let isPlaying = false;
+        function toggleMusic() {
+            const m = document.getElementById('inviteMusic');
+            if(!isPlaying) { m.play(); isPlaying = true; }
+            else { m.pause(); isPlaying = false; }
+        }
+
+        // SCRATCH CARD ENGINE
+        function initScratch() {
+            const canvas = document.getElementById('scratch-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Draw Gold Scratch Layer
+            const grad = ctx.createLinearGradient(0,0,300,130);
+            grad.addColorStop(0, '#D4AF37');
+            grad.addColorStop(0.5, '#FFD700');
+            grad.addColorStop(1, '#D4AF37');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0,0,300,130);
+            
+            ctx.fillStyle = "#444";
+            ctx.font = "bold 16px Montserrat";
+            ctx.textAlign = "center";
+            ctx.fillText("SCRATCH TO REVEAL DATE", 150, 70);
+
+            let mousedown = false;
+            function scratch(e) {
+                if(!mousedown) return;
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.pageX || e.touches[0].pageX) - rect.left - window.scrollX;
+                const y = (e.pageY || e.touches[0].pageY) - rect.top - window.scrollY;
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 25, 0, Math.PI*2);
+                ctx.fill();
+            }
+
+            canvas.addEventListener('mousedown', () => mousedown = true);
+            canvas.addEventListener('mouseup', () => mousedown = false);
+            canvas.addEventListener('mousemove', scratch);
+            canvas.addEventListener('touchstart', () => mousedown = true);
+            canvas.addEventListener('touchend', () => mousedown = false);
+            canvas.addEventListener('touchmove', scratch);
+        }
+
+        function sendRSVP(e) {
+            e.preventDefault();
+            document.querySelector('form').style.display = 'none';
+            document.getElementById('rsvpDone').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
